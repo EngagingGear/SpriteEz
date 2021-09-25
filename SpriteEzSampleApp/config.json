@@ -1,0 +1,17 @@
+{
+  "img-file": "sprite.png",
+  "css-file": "sprite.css",
+  "highlight": true,
+  "disable": true,
+  "hmultiplier": "1.2",
+  "dmultiplier": "1.0",
+  "ntemplate": ".$$IMAGE-CLASS$$.$$NAME$$, .$$IMAGE-CLASS$$.$$NAME$$_N { $$CSS$$ }",
+  "htemplate": ".$$IMAGE-CLASS$$.$$NAME$$:hover, .$$IMAGE-CLASS$$.$$NAME$$_H {$$CSS$$ }",
+  "dtemplate": ".$$IMAGE-CLASS$$.$$NAME$$:disabled, .$$IMAGE-CLASS$$.$$NAME$$_D { $$CSS$$ }",
+  "generate-help": true,
+  "help-file": "help.html",
+  "gray-pixel-threshold": "0.0118",
+  "generate-with-filters": false,
+  "image-class": "sprite-ez",
+  "imgtemplate": ".$$IMAGE-CLASS$$ { background-image: url('./$$FILE$$') !important; background-repeat: no-repeat !important; }"
+}
