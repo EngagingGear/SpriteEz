@@ -7,30 +7,30 @@
 
   <ItemGroup>
     <None Update="Assets\calculator.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="Assets\document.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="Assets\email.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="Assets\home.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="Assets\human.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="Assets\networks.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Update="config.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="mkdir $(TargetDir)SpriteEzTool&#xD;&#xA;copy $(SolutionDir)SpriteEz\$(OutDir)\*.* $(TargetDir)SpriteEzTool\" />
+    <Exec Command="mkdir $(TargetDir)SpriteEzTool&#xD;&#xA;copy $(SolutionDir)SpriteEz\$(OutDir)\*.* $(TargetDir)SpriteEzTool\&#xD;&#xA; $(TargetDir)SpriteEzTool\SpriteEz.exe -config config.json -out-dir $(TargetDir)outdir assets\*.png" />
   </Target>
 
 </Project>

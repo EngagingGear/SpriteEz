@@ -1,0 +1,330 @@
+
+            <!doctype html>
+            <html>
+            <head>
+            <meta charset="utf-8">
+            <title>Sprite Help</title>
+            
+			<link rel="stylesheet" href="sprite.css">
+        
+            <style>
+                .table {
+                    display: flex;
+                    flex-direction: column;
+                }
+                .row{
+                    display: flex;
+                    flex-direction: row;
+                    align-content: center;
+                    justify-content: start;
+                }
+                .image-cell {
+                    flex: 1 1;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    margin-right: 10px;
+                    margin-bottom: 5px;
+                
+                }
+                .hint-cell {
+                    margin-top: 10px;
+                    cursor: pointer;
+                }
+                .hint-cell:hover {
+                    background-color: lightgray;
+                }
+                hr {
+                    width: 100%;
+                }
+                
+			.image {
+				background-image: url('./sprite.png') !important;
+				background-repeat: no-repeat !important;
+			}
+        
+            </style>
+            </head>
+            <body>
+                <script>
+                    function copyToClipboard(id) {
+                        var el = document.getElementById(id);
+                        if(document.selection) {
+                            var range = document.bogy.createTextRange();
+                            range.moveToElementText(el);
+                            range.select().createTextRange();
+                            document.execCommand('copy');
+                        } else {
+                            var range = document.createRange();
+                            range.selectNodeContents(el);
+                            window.getSelection().removeAllRanges();
+                            window.getSelection().addRange(range);
+                            try {
+                                var success = document.execCommand('copy');
+                                var msg = success ? 'successful' : 'unsuccessful';
+                                console.log('Copying text command was ' + msg);
+                            } catch(err) {
+                                console.error('unable to copy ', err);
+                            }
+
+                            window.getSelection().removeAllRanges();
+                        }
+                        alert('Text has been copied to clipboard');
+                    }
+                </script>
+                
+            
+            <div class="table">
+                
+            <div class="row">
+                
+            <div class="image-cell">
+                <div class="sprite-ez calculator"></div>
+                <div id="3c8f115104c84a5daccbb19bc7719b6a" class="hint-cell" onclick="copyToClipboard('3c8f115104c84a5daccbb19bc7719b6a');return false;">
+                    
+            &lt;div class="sprite-ez calculator"/&gt;
+        
+                </div>
+            </div>
+        
+            <div class="image-cell">
+                <div class="sprite-ez calculator_N"></div>
+                <div id="5559ef2e4b124cf3a5a297c43289ccb3" class="hint-cell" onclick="copyToClipboard('5559ef2e4b124cf3a5a297c43289ccb3');return false;">
+                    
+            &lt;div class="sprite-ez calculator_N"/&gt;
+        
+                </div>
+            </div>
+        
+            <div class="image-cell">
+                <div class="sprite-ez calculator_H"></div>
+                <div id="469c4467fae042838e759661f365c044" class="hint-cell" onclick="copyToClipboard('469c4467fae042838e759661f365c044');return false;">
+                    
+            &lt;div class="sprite-ez calculator_H"/&gt;
+        
+                </div>
+            </div>
+        
+            <div class="image-cell">
+                <div class="sprite-ez calculator_D"></div>
+                <div id="a4857c0b79ca4271bb3237c2c1e9f317" class="hint-cell" onclick="copyToClipboard('a4857c0b79ca4271bb3237c2c1e9f317');return false;">
+                    
+            &lt;div class="sprite-ez calculator_D"/&gt;
+        
+                </div>
+            </div>
+        
+            </div>
+            <hr/>    
+        
+            <div class="row">
+                
+            <div class="image-cell">
+                <div class="sprite-ez document"></div>
+                <div id="723c649bc2694b6e8e5d216e96878f75" class="hint-cell" onclick="copyToClipboard('723c649bc2694b6e8e5d216e96878f75');return false;">
+                    
+            &lt;div class="sprite-ez document"/&gt;
+        
+                </div>
+            </div>
+        
+            <div class="image-cell">
+                <div class="sprite-ez document_N"></div>
+                <div id="f9a68513e8b144428095d07a3205cad4" class="hint-cell" onclick="copyToClipboard('f9a68513e8b144428095d07a3205cad4');return false;">
+                    
+            &lt;div class="sprite-ez document_N"/&gt;
+        
+                </div>
+            </div>
+        
+            <div class="image-cell">
+                <div class="sprite-ez document_H"></div>
+                <div id="0dd15a006b5848b99e932967e19acad3" class="hint-cell" onclick="copyToClipboard('0dd15a006b5848b99e932967e19acad3');return false;">
+                    
+            &lt;div class="sprite-ez document_H"/&gt;
+        
+                </div>
+            </div>
+        
+            <div class="image-cell">
+                <div class="sprite-ez document_D"></div>
+                <div id="818ed0acc55e494ba5fe11303cae4a90" class="hint-cell" onclick="copyToClipboard('818ed0acc55e494ba5fe11303cae4a90');return false;">
+                    
+            &lt;div class="sprite-ez document_D"/&gt;
+        
+                </div>
+            </div>
+        
+            </div>
+            <hr/>    
+        
+            <div class="row">
+                
+            <div class="image-cell">
+                <div class="sprite-ez email"></div>
+                <div id="2fdeba8894b34701b48da1b552e20f6d" class="hint-cell" onclick="copyToClipboard('2fdeba8894b34701b48da1b552e20f6d');return false;">
+                    
+            &lt;div class="sprite-ez email"/&gt;
+        
+                </div>
+            </div>
+        
+            <div class="image-cell">
+                <div class="sprite-ez email_N"></div>
+                <div id="930b6db5f2874bbea9c8508a2560dbb3" class="hint-cell" onclick="copyToClipboard('930b6db5f2874bbea9c8508a2560dbb3');return false;">
+                    
+            &lt;div class="sprite-ez email_N"/&gt;
+        
+                </div>
+            </div>
+        
+            <div class="image-cell">
+                <div class="sprite-ez email_H"></div>
+                <div id="889b1336761e4600955e99a8617962be" class="hint-cell" onclick="copyToClipboard('889b1336761e4600955e99a8617962be');return false;">
+                    
+            &lt;div class="sprite-ez email_H"/&gt;
+        
+                </div>
+            </div>
+        
+            <div class="image-cell">
+                <div class="sprite-ez email_D"></div>
+                <div id="7332945ad0e94089b05b41ae21de2377" class="hint-cell" onclick="copyToClipboard('7332945ad0e94089b05b41ae21de2377');return false;">
+                    
+            &lt;div class="sprite-ez email_D"/&gt;
+        
+                </div>
+            </div>
+        
+            </div>
+            <hr/>    
+        
+            <div class="row">
+                
+            <div class="image-cell">
+                <div class="sprite-ez home"></div>
+                <div id="78807155d1d74eaaae4cf8e32018806e" class="hint-cell" onclick="copyToClipboard('78807155d1d74eaaae4cf8e32018806e');return false;">
+                    
+            &lt;div class="sprite-ez home"/&gt;
+        
+                </div>
+            </div>
+        
+            <div class="image-cell">
+                <div class="sprite-ez home_N"></div>
+                <div id="d713ce14e8af4b49b1a48565413f6b3d" class="hint-cell" onclick="copyToClipboard('d713ce14e8af4b49b1a48565413f6b3d');return false;">
+                    
+            &lt;div class="sprite-ez home_N"/&gt;
+        
+                </div>
+            </div>
+        
+            <div class="image-cell">
+                <div class="sprite-ez home_H"></div>
+                <div id="bf918ad9b2ba4185acd5f757e18a336f" class="hint-cell" onclick="copyToClipboard('bf918ad9b2ba4185acd5f757e18a336f');return false;">
+                    
+            &lt;div class="sprite-ez home_H"/&gt;
+        
+                </div>
+            </div>
+        
+            <div class="image-cell">
+                <div class="sprite-ez home_D"></div>
+                <div id="ac27ccf163484ca0afe6325ef0d6ec7e" class="hint-cell" onclick="copyToClipboard('ac27ccf163484ca0afe6325ef0d6ec7e');return false;">
+                    
+            &lt;div class="sprite-ez home_D"/&gt;
+        
+                </div>
+            </div>
+        
+            </div>
+            <hr/>    
+        
+            <div class="row">
+                
+            <div class="image-cell">
+                <div class="sprite-ez human"></div>
+                <div id="1b303bc1be84415ebbc8c74487bc57da" class="hint-cell" onclick="copyToClipboard('1b303bc1be84415ebbc8c74487bc57da');return false;">
+                    
+            &lt;div class="sprite-ez human"/&gt;
+        
+                </div>
+            </div>
+        
+            <div class="image-cell">
+                <div class="sprite-ez human_N"></div>
+                <div id="43a855359d0f490f880a4794a2ceec01" class="hint-cell" onclick="copyToClipboard('43a855359d0f490f880a4794a2ceec01');return false;">
+                    
+            &lt;div class="sprite-ez human_N"/&gt;
+        
+                </div>
+            </div>
+        
+            <div class="image-cell">
+                <div class="sprite-ez human_H"></div>
+                <div id="6dc366614dce403f8b00047dd6632c10" class="hint-cell" onclick="copyToClipboard('6dc366614dce403f8b00047dd6632c10');return false;">
+                    
+            &lt;div class="sprite-ez human_H"/&gt;
+        
+                </div>
+            </div>
+        
+            <div class="image-cell">
+                <div class="sprite-ez human_D"></div>
+                <div id="4ef269864fe54811b155e8ad91d14e15" class="hint-cell" onclick="copyToClipboard('4ef269864fe54811b155e8ad91d14e15');return false;">
+                    
+            &lt;div class="sprite-ez human_D"/&gt;
+        
+                </div>
+            </div>
+        
+            </div>
+            <hr/>    
+        
+            <div class="row">
+                
+            <div class="image-cell">
+                <div class="sprite-ez networks"></div>
+                <div id="0e9807dc40c64bbbbe8259cb4762925f" class="hint-cell" onclick="copyToClipboard('0e9807dc40c64bbbbe8259cb4762925f');return false;">
+                    
+            &lt;div class="sprite-ez networks"/&gt;
+        
+                </div>
+            </div>
+        
+            <div class="image-cell">
+                <div class="sprite-ez networks_N"></div>
+                <div id="5a67186074764b4189340c6980338411" class="hint-cell" onclick="copyToClipboard('5a67186074764b4189340c6980338411');return false;">
+                    
+            &lt;div class="sprite-ez networks_N"/&gt;
+        
+                </div>
+            </div>
+        
+            <div class="image-cell">
+                <div class="sprite-ez networks_H"></div>
+                <div id="6f7e425f7d574812863b492f4ff121b7" class="hint-cell" onclick="copyToClipboard('6f7e425f7d574812863b492f4ff121b7');return false;">
+                    
+            &lt;div class="sprite-ez networks_H"/&gt;
+        
+                </div>
+            </div>
+        
+            <div class="image-cell">
+                <div class="sprite-ez networks_D"></div>
+                <div id="31738088479e4937aff4b5682c551286" class="hint-cell" onclick="copyToClipboard('31738088479e4937aff4b5682c551286');return false;">
+                    
+            &lt;div class="sprite-ez networks_D"/&gt;
+        
+                </div>
+            </div>
+        
+            </div>
+            <hr/>    
+        
+            </div>
+        
+            
+            </body>
+            </html>
+        
