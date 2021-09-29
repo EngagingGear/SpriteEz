@@ -20,8 +20,9 @@ namespace SpriteEzNs
             {
 
                 //write combined class (normal + hover)
-                var line = GenerateCssForImage(cssEntry.NormalImagePos, config.NormalCssTemplate, config.ImageClass, cssEntry.ImgName);
+                var line = GenerateCssForImage(cssEntry.NormalImagePos, config.NormalCssTemplate, config.ImageClass, cssEntry.ImgName, config.NormalCssSuffix);
                 results.Add(line);
+
 
                 //write highlighted
                 if (config.GenerateHighlight)
@@ -29,11 +30,11 @@ namespace SpriteEzNs
                     if (config.GenerateWithFilters)
                     {
                         line = GenerateHighlightedClass(cssEntry.NormalImagePos, config.HighlightCssTemplate,
-                            config.ImageClass, cssEntry.ImgName, config.HighlightMultiplier);
+                            config.ImageClass, cssEntry.ImgName, config.HighlightMultiplier, config.HighlightCssSuffix);
                     }
                     else
                     {
-                        line = GenerateCssForImage(cssEntry.HighlightImagePos, config.HighlightCssTemplate, config.ImageClass, cssEntry.ImgName);
+                        line = GenerateCssForImage(cssEntry.HighlightImagePos, config.HighlightCssTemplate, config.ImageClass, cssEntry.ImgName, config.HighlightCssSuffix);
                     }
                     results.Add(line);
                 }
@@ -44,11 +45,11 @@ namespace SpriteEzNs
                     if (config.GenerateWithFilters)
                     {
                         line = GenerateDisabledClass(cssEntry.NormalImagePos, config.DisabledCssTemplate,
-                            config.ImageClass, cssEntry.ImgName, config.DisableMultiplier);
+                            config.ImageClass, cssEntry.ImgName, config.DisableMultiplier, config.DisabledCssSuffix);
                     }
                     else
                     {
-                        line = GenerateCssForImage(cssEntry.DisabledImagePos, config.DisabledCssTemplate, config.ImageClass, cssEntry.ImgName);
+                        line = GenerateCssForImage(cssEntry.DisabledImagePos, config.DisabledCssTemplate, config.ImageClass, cssEntry.ImgName, config.DisabledCssSuffix);
                     }
 
                     results.Add(line);
@@ -66,35 +67,37 @@ namespace SpriteEzNs
                 .Replace("$$FILE$$", config.SpriteImgFile);
             return line;
         }
-
-        private string GenerateCssForImage(Rectangle rectangle, string template, string imageClass, string imageName)
+        private string GenerateCssForImage(Rectangle rectangle, string template, string imageClass, string imageName, string suffix)
         {
             var css = $"background-position: -{rectangle.X}px -{rectangle.Y}px; width: {rectangle.Width}px; height: {rectangle.Height}px";
             var line = template
                 .Replace("$$IMAGE-CLASS$$", imageClass)
                 .Replace("$$NAME$$", imageName)
+                .Replace("$$SUFFIX$$", suffix)
                 .Replace("$$CSS$$", css);
             return line;
         }
 
 
-        private string GenerateHighlightedClass(Rectangle rectangle, string template, string imageClass, string imageName, double brightnessFactor)
+        private string GenerateHighlightedClass(Rectangle rectangle, string template, string imageClass, string imageName, double brightnessFactor, string suffix)
         {
             var css = $"background-position: -{rectangle.X}px -{rectangle.Y}px; width: {rectangle.Width}px; height: {rectangle.Height}px; filter: brightness({brightnessFactor});";
             var line = template
                 .Replace("$$IMAGE-CLASS$$", imageClass)
                 .Replace("$$NAME$$", imageName)
+                .Replace("SUFFIX", suffix)
                 .Replace("$$CSS$$", css);
 
             return line;
         }
 
-        private string GenerateDisabledClass(Rectangle rectangle, string template, string imageClass, string imageName, double grayscaleFactor)
+        private string GenerateDisabledClass(Rectangle rectangle, string template, string imageClass, string imageName, double grayscaleFactor, string suffix)
         {
             var css = $"background-position: -{rectangle.X}px -{rectangle.Y}px; width: {rectangle.Width}px; height: {rectangle.Height}px; filter: grayscale({grayscaleFactor});";
             var line = template
                 .Replace("$$IMAGE-CLASS$$", imageClass)
                 .Replace("$$NAME$$", imageName)
+                .Replace("SUFFIX", suffix)
                 .Replace("$$CSS$$", css);
 
             return line;

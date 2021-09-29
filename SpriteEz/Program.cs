@@ -43,6 +43,9 @@ namespace SpriteEzNs
                 .Param("imgtemplate", (_, v) => _config.ImageTemplate = v)
                 .Flag("generate-with-filters", (_, v) => _config.GenerateWithFilters = v)
                 .Param("out-dir", (_, v) => _config.OutputDirectory = v)
+                .Param("normal-css-suffix", (_, v) => _config.NormalCssSuffix = v)
+                .Param("highlighted-css-suffix", (_, v) => _config.HighlightCssSuffix = v)
+                .Param("disabled-css-suffix", (_, v) => _config.DisabledCssSuffix = v)
                 .Flag("?")
                 .AllowTrailing();
             cmdLine.Process(args);

@@ -22,6 +22,13 @@ namespace SpriteEzNs
             <title>Sprite Help</title>
             $StyleLinkTemplate
             <style>
+                .title {
+                    margin: 15px;
+                    margin-bottom: 35px;
+                    text-align: center;
+                    font-size: 22px;
+                    font-weight: bold;
+                }
                 .table {
                     display: flex;
                     flex-direction: column;
@@ -40,6 +47,15 @@ namespace SpriteEzNs
                     margin-right: 10px;
                     margin-bottom: 5px;
                 
+                }
+                .column-header {
+                    flex: 1 1;
+                    align-items: center;
+                    margin-right: 10px;
+                    margin-bottom: 5px;
+                    text-align: center;
+                    font-size: 16px;
+                    font-weight: bold;
                 }
                 .hint-cell {
                     margin-top: 10px;
@@ -98,7 +114,14 @@ namespace SpriteEzNs
         ";
 
         private const string BodyTemplate = @"
+            $TitleTemplate
             $TableTemplate
+        ";
+
+        private const string TitleTemplate = @"
+            <div class=""title"">
+                The example usage of generated image sprite
+            </div>
         ";
 
         private const string TableTemplate = @"
@@ -112,6 +135,12 @@ namespace SpriteEzNs
                 $ImageCellsTemplate
             </div>
             <hr/>    
+        ";
+
+        private const string ColumnHeaderTemplate = @"
+            <div class=""column-header"">
+                $ColumnName
+            </div>
         ";
 
         private const string ImageCellTemplate = @"
@@ -134,6 +163,7 @@ namespace SpriteEzNs
             var path = FileUtils.GetDestinationPath(config.OutputDirectory, config.HelpFile);
 
             var bodyText = BodyTemplate
+                .Replace("$TitleTemplate", TitleTemplate)
                 .Replace("$TableTemplate", GenerateTable(cssEntries, config));
 
             var styleLinkText = StyleLinkTemplate.Replace("$File", spriteCssFile);
@@ -162,12 +192,38 @@ namespace SpriteEzNs
         private string GenerateTable(List<CssEntry> cssEntries, Config config)
         {
             var sb = new StringBuilder();
+            sb.Append(GenerateHeaderRow(config));
             foreach (var cssEntry in cssEntries)
             {
                 sb.Append(GenerateRow(cssEntry, config));
             }
 
             return TableTemplate.Replace("$RowsTemplate", sb.ToString());
+        }
+
+        private string GenerateHeaderRow(Config config)
+        {
+            var sb = new StringBuilder();
+
+            //cell for combined image styles
+            sb.Append(ColumnHeaderTemplate.Replace("$ColumnName", "Combined Image"));
+
+            //cell for normal image styles
+            sb.Append(ColumnHeaderTemplate.Replace("$ColumnName", "Normal Image"));
+
+            //cell for highlighted image styles
+            if (config.GenerateHighlight)
+            {
+                sb.Append(ColumnHeaderTemplate.Replace("$ColumnName", "Hihglighted Image"));
+            }
+
+            //cell for disabled image styles
+            if (config.GenerateDisabled)
+            {
+                sb.Append(ColumnHeaderTemplate.Replace("$ColumnName", "Disabled Image"));
+            }
+
+            return RowTemplate.Replace("$ImageCellsTemplate", sb.ToString());
         }
 
         private string GenerateRow(CssEntry cssEntry, Config config)
@@ -188,26 +244,26 @@ namespace SpriteEzNs
 
             //cell for normal image styles
             sb.Append(ImageCellTemplate
-                .Replace("$ImageCellTemplate", $"{config.ImageClass} {cssEntry.ImgName}_N"))
+                .Replace("$ImageCellTemplate", $"{config.ImageClass} {cssEntry.ImgName}{config.NormalCssSuffix}"))
                 .Replace("$HintId", GenerateHintId())
-                .Replace("$HintCellTemplate", GenerateHint(cssEntry, config, "N"));
+                .Replace("$HintCellTemplate", GenerateHint(cssEntry, config, config.NormalCssSuffix));
 
             //cell for highlighted image styles
             if (config.GenerateHighlight)
             {
                 sb.Append(ImageCellTemplate
-                        .Replace("$ImageCellTemplate", $"{config.ImageClass} {cssEntry.ImgName}_H"))
+                        .Replace("$ImageCellTemplate", $"{config.ImageClass} {cssEntry.ImgName}{config.HighlightCssSuffix}"))
                     .Replace("$HintId", GenerateHintId())
-                    .Replace("$HintCellTemplate", GenerateHint(cssEntry, config, "H"));
+                    .Replace("$HintCellTemplate", GenerateHint(cssEntry, config, config.HighlightCssSuffix));
             }
 
             //cell for disabled image styles
             if (config.GenerateDisabled)
             {
                 sb.Append(ImageCellTemplate
-                        .Replace("$ImageCellTemplate", $"{config.ImageClass} {cssEntry.ImgName}_D"))
+                        .Replace("$ImageCellTemplate", $"{config.ImageClass} {cssEntry.ImgName}{config.DisabledCssSuffix}"))
                         .Replace("$HintId", GenerateHintId())
-                        .Replace("$HintCellTemplate", GenerateHint(cssEntry, config, "D"));
+                        .Replace("$HintCellTemplate", GenerateHint(cssEntry, config, config.DisabledCssSuffix));
             }
 
             return sb.ToString();
@@ -218,7 +274,7 @@ namespace SpriteEzNs
             var sb = new StringBuilder();
             sb.Append(string.IsNullOrWhiteSpace(suffix)
                 ? DivMarkupTemplate.Replace("$ClassContent", $"{config.ImageClass} {cssEntry.ImgName}")
-                : DivMarkupTemplate.Replace("$ClassContent", $"{config.ImageClass} {cssEntry.ImgName}_{suffix}"));
+                : DivMarkupTemplate.Replace("$ClassContent", $"{config.ImageClass} {cssEntry.ImgName}{suffix}"));
 
             return sb.ToString();
         }

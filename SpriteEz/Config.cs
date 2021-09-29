@@ -66,7 +66,7 @@ namespace SpriteEzNs
         /// Suffix used to determine if the image is a highlighted version of the suffix-less
         /// image. For example, home.png and home_h.png would be considered related
         /// </summary>
-        public string HighlightSuffix = "_h";
+        public string HighlightSuffix = "h";
         /// <summary>
         /// Suffix used to determine if the image is a disabled version of the suffix-less
         /// image. For example, home.png and home_d.png would be considered related
@@ -83,5 +83,8 @@ namespace SpriteEzNs
         public string ImageClass;
         public string ImageTemplate;
         public string OutputDirectory;
+        public string NormalCssSuffix;
+        public string HighlightCssSuffix;
+        public string DisabledCssSuffix;
     }
 }
