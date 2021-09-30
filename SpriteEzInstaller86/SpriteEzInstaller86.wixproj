@@ -57,6 +57,6 @@
       <LinkerBaseInputPaths>..\SpriteEz\bin\$(Configuration)\net5.0\win-x86\publish</LinkerBaseInputPaths>
       <DefineConstants>BasePath=..\SpriteEz\bin\$(Configuration)\net5.0\win-x86\publish</DefineConstants>
     </PropertyGroup>
-    <HeatDirectory OutputFile="SpriteEz86.wxs" DirectoryRefId="INSTALLFOLDER" ComponentGroupName="SpriteEz_Project" SuppressCom="true" Directory="..\SpriteEz\bin\$(Configuration)\net5.0\win-x64\publish" SuppressFragments="true" SuppressRegistry="true" SuppressRootDirectory="true" AutoGenerateGuids="false" GenerateGuidsNow="true" ToolPath="$(WixToolPath)" PreprocessorVariable="var.BasePath" />
+    <HeatDirectory OutputFile="SpriteEz86.wxs" DirectoryRefId="INSTALLFOLDER" ComponentGroupName="SpriteEz_Project" SuppressCom="true" Directory="..\SpriteEz\bin\$(Configuration)\net5.0\win-x86\publish" SuppressFragments="true" SuppressRegistry="true" SuppressRootDirectory="true" AutoGenerateGuids="false" GenerateGuidsNow="true" ToolPath="$(WixToolPath)" PreprocessorVariable="var.BasePath" />
   </Target>
 </Project>
