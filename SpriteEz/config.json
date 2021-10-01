@@ -9,7 +9,7 @@
   "htemplate": ".$$IMAGE-CLASS$$.$$NAME$$:hover, .$$IMAGE-CLASS$$-inline.$$NAME$$:hover,.$$IMAGE-CLASS$$.$$NAME$$$$SUFFIX$$ {$$CSS$$ }",
   "dtemplate": ".$$IMAGE-CLASS$$.$$NAME$$:disabled, .$$IMAGE-CLASS$$-inline.$$NAME$$:disabled, .$$IMAGE-CLASS$$.$$NAME$$$$SUFFIX$$ { $$CSS$$ }",
   "generate-help": true,
-  "help-file": "help.html",
+  "help-file": "sprite.html",
   "gray-pixel-threshold": "0.0118",
   "generate-with-filters": false,
   "image-class": "sprite-ez",
