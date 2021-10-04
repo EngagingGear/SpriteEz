@@ -20,7 +20,7 @@ namespace SpriteEzNs
             {
 
                 //write combined class (normal + hover)
-                var line = GenerateCssForImage(cssEntry.NormalImagePos, config.NormalCssTemplate, config.ImageClass, cssEntry.ImgName, config.NormalCssSuffix);
+                var line = GenerateCssForImage(cssEntry.NormalImagePos, config.NormalCssTemplate, config.ImageClass, cssEntry.ImgName, config.NormalSuffix);
                 results.Add(line);
 
 
@@ -30,11 +30,11 @@ namespace SpriteEzNs
                     if (config.GenerateWithFilters)
                     {
                         line = GenerateHighlightedClass(cssEntry.NormalImagePos, config.HighlightCssTemplate,
-                            config.ImageClass, cssEntry.ImgName, config.HighlightMultiplier, config.HighlightCssSuffix);
+                            config.ImageClass, cssEntry.ImgName, config.HighlightMultiplier, config.HighlightSuffix);
                     }
                     else
                     {
-                        line = GenerateCssForImage(cssEntry.HighlightImagePos, config.HighlightCssTemplate, config.ImageClass, cssEntry.ImgName, config.HighlightCssSuffix);
+                        line = GenerateCssForImage(cssEntry.HighlightImagePos, config.HighlightCssTemplate, config.ImageClass, cssEntry.ImgName, config.HighlightSuffix);
                     }
                     results.Add(line);
                 }
@@ -45,11 +45,11 @@ namespace SpriteEzNs
                     if (config.GenerateWithFilters)
                     {
                         line = GenerateDisabledClass(cssEntry.NormalImagePos, config.DisabledCssTemplate,
-                            config.ImageClass, cssEntry.ImgName, config.DisableMultiplier, config.DisabledCssSuffix);
+                            config.ImageClass, cssEntry.ImgName, config.DisableMultiplier, config.DisabledSuffix);
                     }
                     else
                     {
-                        line = GenerateCssForImage(cssEntry.DisabledImagePos, config.DisabledCssTemplate, config.ImageClass, cssEntry.ImgName, config.DisabledCssSuffix);
+                        line = GenerateCssForImage(cssEntry.DisabledImagePos, config.DisabledCssTemplate, config.ImageClass, cssEntry.ImgName, config.DisabledSuffix);
                     }
 
                     results.Add(line);

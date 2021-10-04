@@ -14,7 +14,8 @@
   "generate-with-filters": false,
   "image-class": "sprite-ez",
   "imgtemplate": ".$$IMAGE-CLASS$$,.$$IMAGE-CLASS$$-inline { background-image: url('./$$FILE$$') !important; background-repeat: no-repeat !important; }\n.$$IMAGE-CLASS$$-inline {display: inline-block;}",
-  "normal-css-suffix": "_n",
-  "highlighted-css-suffix": "_h",
-  "disabled-css-suffix": "_d"
+  "normal-suffix": "_n",
+  "highlighted-suffix": "_h",
+  "disabled-suffix": "_d",
+  "compress":  false 
 }

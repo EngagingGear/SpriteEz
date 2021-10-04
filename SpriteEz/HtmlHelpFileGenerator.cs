@@ -268,26 +268,26 @@ Have a look at the html code for this page to see how to do this.
 
             //cell for normal image styles
             sb.Append(ImageCellTemplate
-                .Replace("$ImageCellTemplate", $"{config.ImageClass} {cssEntry.ImgName}{config.NormalCssSuffix}"))
+                .Replace("$ImageCellTemplate", $"{config.ImageClass} {cssEntry.ImgName}{config.NormalSuffix}"))
                 .Replace("$HintId", GenerateHintId())
-                .Replace("$HintCellTemplate", GenerateHint(cssEntry, config, config.NormalCssSuffix));
+                .Replace("$HintCellTemplate", GenerateHint(cssEntry, config, config.NormalSuffix));
 
             //cell for highlighted image styles
             if (config.GenerateHighlight)
             {
                 sb.Append(ImageCellTemplate
-                        .Replace("$ImageCellTemplate", $"{config.ImageClass} {cssEntry.ImgName}{config.HighlightCssSuffix}"))
+                        .Replace("$ImageCellTemplate", $"{config.ImageClass} {cssEntry.ImgName}{config.HighlightSuffix}"))
                     .Replace("$HintId", GenerateHintId())
-                    .Replace("$HintCellTemplate", GenerateHint(cssEntry, config, config.HighlightCssSuffix));
+                    .Replace("$HintCellTemplate", GenerateHint(cssEntry, config, config.HighlightSuffix));
             }
 
             //cell for disabled image styles
             if (config.GenerateDisabled)
             {
                 sb.Append(ImageCellTemplate
-                        .Replace("$ImageCellTemplate", $"{config.ImageClass} {cssEntry.ImgName}{config.DisabledCssSuffix}"))
+                        .Replace("$ImageCellTemplate", $"{config.ImageClass} {cssEntry.ImgName}{config.DisabledSuffix}"))
                         .Replace("$HintId", GenerateHintId())
-                        .Replace("$HintCellTemplate", GenerateHint(cssEntry, config, config.DisabledCssSuffix));
+                        .Replace("$HintCellTemplate", GenerateHint(cssEntry, config, config.DisabledSuffix));
             }
 
             return sb.ToString();
