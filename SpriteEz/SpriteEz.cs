@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using nQuant;
 
 // ReSharper disable once CheckNamespace
 namespace SpriteEzNs
@@ -13,6 +14,9 @@ namespace SpriteEzNs
     /// </summary>
     public class SpriteEz
     {
+        private static int alphaTransparency = 10;
+        private static int alphaFader = 70;
+
         private readonly Config _config;
         private readonly List<ImgFile> _imgFiles;
         private readonly CssGenerator _cssGenerator;
@@ -120,8 +124,20 @@ namespace SpriteEzNs
             //save generated image file
             try
             {
+
                 var destinationPath = FileUtils.GetDestinationPath(_config.OutputDirectory, _config.SpriteImgFile);
-                sprite.Save(destinationPath, ImageFormat.Png);
+                if (_config.Compress)
+                {
+                    _logger.Log($"Compressing sprite image");
+
+                    var quantizer = new WuQuantizer();
+                    using var quantized = quantizer.QuantizeImage(sprite, alphaTransparency, alphaFader);
+                    quantized.Save(destinationPath, ImageFormat.Png);
+                }
+                else
+                {
+                    sprite.Save(destinationPath, ImageFormat.Png);
+                }
             }
             catch (Exception exception)
             {

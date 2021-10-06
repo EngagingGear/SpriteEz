@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="SpriteEz" Language="1033" Version="1.0.0.0" Manufacturer="HP Inc." UpgradeCode="6ce90262-4065-4be8-98bb-134d4167dd23">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x86" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <Media Id="1" Cabinet="SpriteEz.cab" EmbedCab="yes" />
+
+    <Feature Id="ProductFeature" Title="SpriteEz" Level="1">
+      <!-- <ComponentGroupRef Id="ProductComponents" /> -->
+      <ComponentGroupRef Id="SpriteEz_Project" />
+    </Feature>
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER"/>
+    <UIRef Id="WixUI_InstallDir"/>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="SpriteEz" />
+			</Directory>
+		</Directory>
+	</Fragment>
+</Wix>

@@ -5,13 +5,22 @@
   "disable": true,
   "hmultiplier": "1.2",
   "dmultiplier": "1.0",
-  "ntemplate": ".$$IMAGE-CLASS$$.$$NAME$$, .$$IMAGE-CLASS$$.$$NAME$$_N { $$CSS$$ }",
-  "htemplate": ".$$IMAGE-CLASS$$.$$NAME$$:hover, .$$IMAGE-CLASS$$.$$NAME$$_H {$$CSS$$ }",
-  "dtemplate": ".$$IMAGE-CLASS$$.$$NAME$$:disabled, .$$IMAGE-CLASS$$.$$NAME$$_D { $$CSS$$ }",
+  "ntemplate":
+    ".$$IMAGE-CLASS$$.$$NAME$$, .$$IMAGE-CLASS$$-inline.$$NAME$$,.$$IMAGE-CLASS$$.$$NAME$$$$SUFFIX$$ { $$CSS$$ }",
+  "htemplate":
+    ".$$IMAGE-CLASS$$.$$NAME$$:hover, .$$IMAGE-CLASS$$-inline.$$NAME$$:hover,.$$IMAGE-CLASS$$.$$NAME$$$$SUFFIX$$ {$$CSS$$ }",
+  "dtemplate":
+    ".$$IMAGE-CLASS$$.$$NAME$$:disabled, .$$IMAGE-CLASS$$-inline.$$NAME$$:disabled, .$$IMAGE-CLASS$$.$$NAME$$$$SUFFIX$$ { $$CSS$$ }",
   "generate-help": true,
-  "help-file": "help.html",
+  "help-file": "sprite.html",
   "gray-pixel-threshold": "0.0118",
   "generate-with-filters": false,
   "image-class": "sprite-ez",
-  "imgtemplate": ".$$IMAGE-CLASS$$ { background-image: url('./$$FILE$$') !important; background-repeat: no-repeat !important; }"
+  "imgtemplate":
+    ".$$IMAGE-CLASS$$,.$$IMAGE-CLASS$$-inline { background-image: url('./$$FILE$$') !important; background-repeat: no-repeat !important; }\n.$$IMAGE-CLASS$$-inline {display: inline-block;}",
+  "normal-suffix": "_n",
+  "highlighted-suffix": "_h",
+  "disabled-suffix": "_d",
+  "compress": true
 }
+
