@@ -7,8 +7,16 @@ Documentation for this software, including how to install and use is to be found
 
 <table>
   <tr>
-  <td>This software is sponsored by Surge, a Catalyte company. We gratefully acknowledge their support and help</td>
-  <td><img width="200px" src="https://user-images.githubusercontent.com/88802169/144468950-d0a8fadf-8fa8-4893-801c-f543e11da9e9.png" /></td>
-  </tr>
+    <td>
+      This software is sponsored by Surge, a Catalyte company. I gratefully acknowledge their support and help.
+      If you are a great developer looking for a great consulting company you should check them out.
+      And if you are looking to bring on developers to your team you will find the very highest quality talent there.
+    </td>
+  <td>
+    <a href="https://www.surgeforward.com/">
+      <img width="200px" src="https://user-images.githubusercontent.com/88802169/144468950-d0a8fadf-8fa8-4893-801c-f543e11da9e9.png" />
+    </a>
+   </td>
+ </tr>
 </table>
 
