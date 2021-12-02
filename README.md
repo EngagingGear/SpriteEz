@@ -6,5 +6,5 @@ It will also generate an HTML file that you can open up and see all the individu
 Documentation for this software, including how to install and use is to be found <a href="https://github.com/EngagingGear/SpriteEz/wiki">here</a>.
 
 
-![Surge - a Catalyte company logo transparent](https://user-images.githubusercontent.com/88802169/144468950-d0a8fadf-8fa8-4893-801c-f543e11da9e9.png)
+|This software is sponsored by Surge, a Catalyte company. We gratefully acknowledge their support and help | ![Surge - a Catalyte company logo transparent](https://user-images.githubusercontent.com/88802169/144468950-d0a8fadf-8fa8-4893-801c-f543e11da9e9.png) |
 
