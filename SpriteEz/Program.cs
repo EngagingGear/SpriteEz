@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using CmdLineEzNs;
-
-// TODO add a feature to generate a sample file
-// Able to load config files
 
 // ReSharper disable once CheckNamespace
 namespace SpriteEzNs
@@ -15,14 +10,8 @@ namespace SpriteEzNs
         private static readonly ImageFileListGenerator FileListGenerator = new(Logger);
         private static Config _config;
 
-        static Program()
-        {
-
-        }
-
         static void Main(string[] args)
         {
-            
             _config = new Config();
             var cmdLine = new CmdLineEz()
                 .Config("config")
@@ -47,6 +36,7 @@ namespace SpriteEzNs
                 .Param("highlighted-suffix", (_, v) => _config.HighlightSuffix = v)
                 .Param("disabled-suffix", (_, v) => _config.DisabledSuffix = v)
                 .Flag("compress", (_, v) => _config.Compress = v)
+                .Flag("embedded", (_, v) => _config.Embedded = v)
                 .Flag("?")
                 .AllowTrailing();
             cmdLine.Process(args);
@@ -74,6 +64,8 @@ namespace SpriteEzNs
                 ntemplate     -- Template for css for normal images
                 htemplate     -- Template for css for highlight images
                 dtemplate     -- Template for css for disabled images
+                compress      -- Compress output images
+                embedded      -- Embed output images into css styles
                 help          -- Display this help message
                 ");
         }

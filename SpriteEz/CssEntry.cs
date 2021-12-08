@@ -9,10 +9,14 @@ namespace SpriteEzNs
     /// </summary>
     public class CssEntry
     {
+        public CssEntry(string imgName)
+        {
+            ImgName = imgName;
+        }
         /// <summary>
         ///  Name of the image to use in CSS definitions. Usually the normal file basename
         /// </summary>
-        public string ImgName;
+        public string ImgName { get; }
         /// <summary>
         ///  Position of the normal image
         /// </summary>
@@ -27,6 +31,7 @@ namespace SpriteEzNs
         public Rectangle DisabledImagePos;
 
         public string NormalImageCssText;
+
         public string DisabledImageCssText;
         public string HighlightedImageCssText;
     }

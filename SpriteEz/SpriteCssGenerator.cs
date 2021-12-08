@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
 
+// ReSharper disable once CheckNamespace
 namespace SpriteEzNs
 {
-    public class CssGenerator
+    public class SpriteCssGenerator : ICssGenerator
     {
         public List<string> Generate(List<CssEntry> cssEntries, Config config)
         {
@@ -18,9 +16,9 @@ namespace SpriteEzNs
             //For each css entry:
             foreach (var cssEntry in cssEntries)
             {
-
                 //write combined class (normal + hover)
-                var line = GenerateCssForImage(cssEntry.NormalImagePos, config.NormalCssTemplate, config.ImageClass, cssEntry.ImgName, config.NormalSuffix);
+                var line = GenerateCssForImage(cssEntry.NormalImagePos, config.NormalCssTemplate, config.ImageClass,
+                    cssEntry.ImgName, config.NormalSuffix);
                 results.Add(line);
 
 
@@ -28,14 +26,11 @@ namespace SpriteEzNs
                 if (config.GenerateHighlight)
                 {
                     if (config.GenerateWithFilters)
-                    {
                         line = GenerateHighlightedClass(cssEntry.NormalImagePos, config.HighlightCssTemplate,
                             config.ImageClass, cssEntry.ImgName, config.HighlightMultiplier, config.HighlightSuffix);
-                    }
                     else
-                    {
-                        line = GenerateCssForImage(cssEntry.HighlightImagePos, config.HighlightCssTemplate, config.ImageClass, cssEntry.ImgName, config.HighlightSuffix);
-                    }
+                        line = GenerateCssForImage(cssEntry.HighlightImagePos, config.HighlightCssTemplate,
+                            config.ImageClass, cssEntry.ImgName, config.HighlightSuffix);
                     results.Add(line);
                 }
 
@@ -43,18 +38,14 @@ namespace SpriteEzNs
                 if (config.GenerateDisabled)
                 {
                     if (config.GenerateWithFilters)
-                    {
                         line = GenerateDisabledClass(cssEntry.NormalImagePos, config.DisabledCssTemplate,
                             config.ImageClass, cssEntry.ImgName, config.DisableMultiplier, config.DisabledSuffix);
-                    }
                     else
-                    {
-                        line = GenerateCssForImage(cssEntry.DisabledImagePos, config.DisabledCssTemplate, config.ImageClass, cssEntry.ImgName, config.DisabledSuffix);
-                    }
+                        line = GenerateCssForImage(cssEntry.DisabledImagePos, config.DisabledCssTemplate,
+                            config.ImageClass, cssEntry.ImgName, config.DisabledSuffix);
 
                     results.Add(line);
                 }
-
             }
 
             return results;
@@ -67,9 +58,12 @@ namespace SpriteEzNs
                 .Replace("$$FILE$$", config.SpriteImgFile);
             return line;
         }
-        private string GenerateCssForImage(Rectangle rectangle, string template, string imageClass, string imageName, string suffix)
+
+        private string GenerateCssForImage(Rectangle rectangle, string template, string imageClass, string imageName,
+            string suffix)
         {
-            var css = $"background-position: -{rectangle.X}px -{rectangle.Y}px; width: {rectangle.Width}px; height: {rectangle.Height}px";
+            var css =
+                $"background-position: -{rectangle.X}px -{rectangle.Y}px; width: {rectangle.Width}px; height: {rectangle.Height}px";
             var line = template
                 .Replace("$$IMAGE-CLASS$$", imageClass)
                 .Replace("$$NAME$$", imageName)
@@ -78,10 +72,11 @@ namespace SpriteEzNs
             return line;
         }
 
-
-        private string GenerateHighlightedClass(Rectangle rectangle, string template, string imageClass, string imageName, double brightnessFactor, string suffix)
+        private string GenerateHighlightedClass(Rectangle rectangle, string template, string imageClass,
+            string imageName, double brightnessFactor, string suffix)
         {
-            var css = $"background-position: -{rectangle.X}px -{rectangle.Y}px; width: {rectangle.Width}px; height: {rectangle.Height}px; filter: brightness({brightnessFactor});";
+            var css =
+                $"background-position: -{rectangle.X}px -{rectangle.Y}px; width: {rectangle.Width}px; height: {rectangle.Height}px; filter: brightness({brightnessFactor});";
             var line = template
                 .Replace("$$IMAGE-CLASS$$", imageClass)
                 .Replace("$$NAME$$", imageName)
@@ -91,9 +86,11 @@ namespace SpriteEzNs
             return line;
         }
 
-        private string GenerateDisabledClass(Rectangle rectangle, string template, string imageClass, string imageName, double grayscaleFactor, string suffix)
+        private string GenerateDisabledClass(Rectangle rectangle, string template, string imageClass, string imageName,
+            double grayscaleFactor, string suffix)
         {
-            var css = $"background-position: -{rectangle.X}px -{rectangle.Y}px; width: {rectangle.Width}px; height: {rectangle.Height}px; filter: grayscale({grayscaleFactor});";
+            var css =
+                $"background-position: -{rectangle.X}px -{rectangle.Y}px; width: {rectangle.Width}px; height: {rectangle.Height}px; filter: grayscale({grayscaleFactor});";
             var line = template
                 .Replace("$$IMAGE-CLASS$$", imageClass)
                 .Replace("$$NAME$$", imageName)
