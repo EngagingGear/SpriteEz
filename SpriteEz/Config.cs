@@ -89,5 +89,7 @@ namespace SpriteEzNs
         public string DisabledSuffix;
 
         public bool Compress;
+
+        public bool Embedded;
     }
 }

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,31 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="Assets\calculator.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\document.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\email.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\home.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\human.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\networks.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
     <None Update="config.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="mkdir $(TargetDir)SpriteEzTool&#xD;&#xA;copy $(SolutionDir)SpriteEz\$(OutDir)\*.* $(TargetDir)SpriteEzTool\&#xD;&#xA; $(TargetDir)SpriteEzTool\SpriteEz.exe -config config.json -out-dir $(TargetDir)outdir assets\*.png" />
+    <Exec Command="mkdir $(TargetDir)SpriteEzTool&#xD;&#xA;copy $(SolutionDir)SpriteEz\$(OutDir)*.* $(TargetDir)SpriteEzTool\&#xD;&#xA;$(TargetDir)SpriteEzTool\SpriteEz.exe -config config.json -out-dir $(TargetDir)outdir assets\*.png" />
   </Target>
 
 </Project>

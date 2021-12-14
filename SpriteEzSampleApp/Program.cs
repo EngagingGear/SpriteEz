@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Reflection;
 
 namespace SpriteEzSampleApp
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine("Ok");
         }

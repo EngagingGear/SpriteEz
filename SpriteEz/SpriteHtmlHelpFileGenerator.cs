@@ -5,11 +5,11 @@ using System.Text;
 
 namespace SpriteEzNs
 {
-    public class HtmlHelpFileGenerator
+    public class SpriteHtmlHelpFileGenerator : IHtmlHelpFileGenerator
     {
         private readonly Logger _logger;
 
-        public HtmlHelpFileGenerator(Logger logger)
+        public SpriteHtmlHelpFileGenerator(Logger logger)
         {
             _logger = logger;
         }
