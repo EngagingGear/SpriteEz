@@ -2,16 +2,16 @@
 using System.Drawing;
 
 // ReSharper disable once CheckNamespace
-namespace SpriteEzNs
+namespace SpriteEz
 {
-    public class SpriteCssGenerator : ICssGenerator
+    public class SpriteCssGenerator : ISpriteCssGenerator
     {
-        public List<string> Generate(List<CssEntry> cssEntries, Config config)
+        public List<string> Generate(List<CssEntry> cssEntries, Config config, string spriteFileName = null)
         {
             var results = new List<string>();
 
             //First write image class
-            results.Add(AddImageClass(config));
+            results.Add(AddImageClass(config, spriteFileName));
 
             //For each css entry:
             foreach (var cssEntry in cssEntries)
@@ -26,11 +26,16 @@ namespace SpriteEzNs
                 if (config.GenerateHighlight)
                 {
                     if (config.GenerateWithFilters)
+                    {
                         line = GenerateHighlightedClass(cssEntry.NormalImagePos, config.HighlightCssTemplate,
                             config.ImageClass, cssEntry.ImgName, config.HighlightMultiplier, config.HighlightSuffix);
+                    }
                     else
+                    {
                         line = GenerateCssForImage(cssEntry.HighlightImagePos, config.HighlightCssTemplate,
                             config.ImageClass, cssEntry.ImgName, config.HighlightSuffix);
+                    }
+
                     results.Add(line);
                 }
 
@@ -38,11 +43,15 @@ namespace SpriteEzNs
                 if (config.GenerateDisabled)
                 {
                     if (config.GenerateWithFilters)
+                    {
                         line = GenerateDisabledClass(cssEntry.NormalImagePos, config.DisabledCssTemplate,
                             config.ImageClass, cssEntry.ImgName, config.DisableMultiplier, config.DisabledSuffix);
+                    }
                     else
+                    {
                         line = GenerateCssForImage(cssEntry.DisabledImagePos, config.DisabledCssTemplate,
                             config.ImageClass, cssEntry.ImgName, config.DisabledSuffix);
+                    }
 
                     results.Add(line);
                 }
@@ -51,11 +60,11 @@ namespace SpriteEzNs
             return results;
         }
 
-        private string AddImageClass(Config config)
+        private string AddImageClass(Config config, string spriteFileName)
         {
             var line = config.ImageTemplate
                 .Replace("$$IMAGE-CLASS$$", config.ImageClass)
-                .Replace("$$FILE$$", config.SpriteImgFile);
+                .Replace("$$FILE$$", spriteFileName);
             return line;
         }
 

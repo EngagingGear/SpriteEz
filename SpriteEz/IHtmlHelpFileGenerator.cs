@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace SpriteEzNs
+namespace SpriteEz
 {
     public interface IHtmlHelpFileGenerator
     {
-        void GenerateFile(List<CssEntry> cssEntries, Config config);
+        void GenerateFile(List<string> imageNames, Config config, string cssFileName);
     }
 }

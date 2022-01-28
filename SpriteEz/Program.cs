@@ -1,16 +1,15 @@
 ﻿using System;
 using CmdLineEzNs;
 
-// ReSharper disable once CheckNamespace
-namespace SpriteEzNs
+namespace SpriteEz
 {
-    class Program
+    internal class Program
     {
         private static readonly Logger Logger = new();
         private static readonly ImageFileListGenerator FileListGenerator = new(Logger);
         private static Config _config;
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             _config = new Config();
             var cmdLine = new CmdLineEz()
@@ -37,16 +36,24 @@ namespace SpriteEzNs
                 .Param("disabled-suffix", (_, v) => _config.DisabledSuffix = v)
                 .Flag("compress", (_, v) => _config.Compress = v)
                 .Flag("embedded", (_, v) => _config.Embedded = v)
+                .Param("auto-size-xs", (_, v) => AsDouble(v, x => _config.AutoSizeXs = x))
+                .Param("auto-size-sm", (_, v) => AsDouble(v, x => _config.AutoSizeSm = x))
+                .Param("auto-size-md", (_, v) => AsDouble(v, x => _config.AutoSizeMd = x))
+                .Param("auto-size-lg", (_, v) => AsDouble(v, x => _config.AutoSizeLg = x))
+                .Param("auto-size-xl", (_, v) => AsDouble(v, x => _config.AutoSizeXl = x))
+                .Param("auto-size-xxl", (_, v) => AsDouble(v, x => _config.AutoSizeXxl = x))
                 .Flag("?")
                 .AllowTrailing();
             cmdLine.Process(args);
 
             if (cmdLine.FlagVal("help") == true || cmdLine.FlagVal("?") == true)
+            {
                 ShowHelp();
+            }
             else
             {
                 var imgFiles = FileListGenerator.GenerateImageFileNames(cmdLine.TrailingVal(), _config);
-                var generator = new SpriteEz(imgFiles,  _config, Logger);
+                var generator = new SpriteEzGenerator(imgFiles, _config, Logger);
                 generator.Generate();
             }
         }
@@ -72,19 +79,46 @@ namespace SpriteEzNs
 
         private static void SetGMultiplier(Config config, string value)
         {
-            if (!double.TryParse(value, out config.DisableMultiplier) || config.DisableMultiplier <= 0 || config.DisableMultiplier > 1)
+            if (!double.TryParse(value, out config.DisableMultiplier) || config.DisableMultiplier <= 0 ||
+                config.DisableMultiplier > 1)
+            {
                 throw new SpriteEzException($"Invalid gmultiplier: {value}, but be decimal value between 0 and 1");
+            }
         }
 
         private static void SetBMultiplier(Config config, string value)
         {
-            if (!double.TryParse(value, out config.HighlightMultiplier) || config.HighlightMultiplier <= 1 || config.HighlightMultiplier > 2)
+            if (!double.TryParse(value, out config.HighlightMultiplier) || config.HighlightMultiplier <= 1 ||
+                config.HighlightMultiplier > 2)
+            {
                 throw new SpriteEzException($"Invalid bmultiplier: {value}, but be decimal value between 1 and 2");
+            }
         }
+
         private static void SetGThreshold(Config config, string value)
         {
-            if (!double.TryParse(value, out config.GrayScalePixelThrehold) || config.GrayScalePixelThrehold < 0 || config.GrayScalePixelThrehold > 1)
-                throw new SpriteEzException($"Invalid gray-scale pixel threshold: {value}, but be decimal value between 0 and 1");
+            if (!double.TryParse(value, out config.GrayScalePixelThrehold) || config.GrayScalePixelThrehold < 0 ||
+                config.GrayScalePixelThrehold > 1)
+            {
+                throw new SpriteEzException(
+                    $"Invalid gray-scale pixel threshold: {value}, but be decimal value between 0 and 1");
+            }
+        }
+
+        private static void AsDouble(string value, Action<double> setter, Func<double, bool> checker = null,
+            string message = null)
+        {
+            if (!double.TryParse(value, out var doubleValue))
+            {
+                throw new SpriteEzException(message ?? $"Cannot convert {value} to double");
+            }
+
+            if (checker != null && !checker(doubleValue))
+            {
+                throw new SpriteEzException(message ?? $"Check failed for {doubleValue}");
+            }
+
+            setter(doubleValue);
         }
     }
 }

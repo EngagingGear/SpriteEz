@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 
-namespace SpriteEzNs
+namespace SpriteEz.Utils
 {
     public static class ImageUtils
     {
-        private static readonly List<string> SupportedExtensions = new() { "png", "gif"};
+        private static readonly List<string> SupportedExtensions = new() { "png", "gif" };
+
         public static bool IsSupportedImageExtension(string fileName)
         {
             if (string.IsNullOrWhiteSpace(fileName))
