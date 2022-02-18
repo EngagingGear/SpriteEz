@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace SpriteEzNs
+namespace SpriteEz
 {
     public class Logger
     {

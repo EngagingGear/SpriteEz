@@ -2,19 +2,13 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using SpriteEz.Utils;
 
 // ReSharper disable once CheckNamespace
-namespace SpriteEzNs
+namespace SpriteEz
 {
     public class EmbeddedImageHtmlHelpFileGenerator : IHtmlHelpFileGenerator
     {
-        private readonly Logger _logger;
-
-        public EmbeddedImageHtmlHelpFileGenerator(Logger logger)
-        {
-            _logger = logger;
-        }
-
         private const string FileTemplate = @"
             <!doctype html>
             <html>
@@ -174,14 +168,21 @@ Have a look at the html code for this page to see how to do this.
             &lt;div class=""$ClassContent""/&gt;
         ";
 
-        public void GenerateFile(List<CssEntry> cssEntries, Config config)
+        private readonly Logger _logger;
+
+        public EmbeddedImageHtmlHelpFileGenerator(Logger logger)
         {
-            var spriteCssFile = config.SpriteCssFile;
+            _logger = logger;
+        }
+
+        public void GenerateFile(List<string> imageNames, Config config, string cssFileName)
+        {
+            var spriteCssFile = cssFileName;
             var path = FileUtils.GetDestinationPath(config.OutputDirectory, config.HelpFile);
 
             var bodyText = BodyTemplate
                 .Replace("$TitleTemplate", TitleTemplate)
-                .Replace("$TableTemplate", GenerateTable(cssEntries, config));
+                .Replace("$TableTemplate", GenerateTable(imageNames, config));
 
             var styleLinkText = StyleLinkTemplate.Replace("$File", spriteCssFile);
 
@@ -196,7 +197,11 @@ Have a look at the html code for this page to see how to do this.
         {
             try
             {
-                if (File.Exists(path)) File.Delete(path);
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+
                 File.WriteAllText(path, content);
             }
             catch (Exception exception)
@@ -205,13 +210,13 @@ Have a look at the html code for this page to see how to do this.
             }
         }
 
-        private string GenerateTable(List<CssEntry> cssEntries, Config config)
+        private string GenerateTable(List<string> imageNames, Config config)
         {
             var sb = new StringBuilder();
             sb.Append(GenerateHeaderRow(config));
-            foreach (var cssEntry in cssEntries)
+            foreach (var imageName in imageNames)
             {
-                sb.Append(GenerateRow(cssEntry, config));
+                sb.Append(GenerateRow(imageName, config));
             }
 
             return TableTemplate.Replace("$RowsTemplate", sb.ToString());
@@ -242,55 +247,55 @@ Have a look at the html code for this page to see how to do this.
             return RowTemplate.Replace("$ImageCellsTemplate", sb.ToString());
         }
 
-        private string GenerateRow(CssEntry cssEntry, Config config)
+        private string GenerateRow(string imageName, Config config)
         {
-            return RowTemplate.Replace("$ImageCellsTemplate", GenerateRowImages(cssEntry, config));
+            return RowTemplate.Replace("$ImageCellsTemplate", GenerateRowImages(imageName, config));
         }
 
-        private string GenerateRowImages(CssEntry cssEntry, Config config)
+        private string GenerateRowImages(string imageName, Config config)
         {
             var sb = new StringBuilder();
 
             //cell for combined image styles
             sb.Append(ImageCellTemplate
-                .Replace("$ImageCellTemplate", $"{config.ImageClass} {cssEntry.ImgName}"))
+                    .Replace("$ImageCellTemplate", $"{config.ImageClass} {imageName}"))
                 .Replace("$HintId", GenerateHintId())
-                .Replace("$HintCellTemplate", GenerateHint(cssEntry, config, null)
-            );
+                .Replace("$HintCellTemplate", GenerateHint(imageName, config, null)
+                );
 
             //cell for normal image styles
             sb.Append(ImageCellTemplate
-                .Replace("$ImageCellTemplate", $"{config.ImageClass} {cssEntry.ImgName}{config.NormalSuffix}"))
+                    .Replace("$ImageCellTemplate", $"{config.ImageClass} {imageName}{config.NormalSuffix}"))
                 .Replace("$HintId", GenerateHintId())
-                .Replace("$HintCellTemplate", GenerateHint(cssEntry, config, config.NormalSuffix));
+                .Replace("$HintCellTemplate", GenerateHint(imageName, config, config.NormalSuffix));
 
             //cell for highlighted image styles
             if (config.GenerateHighlight)
             {
                 sb.Append(ImageCellTemplate
-                        .Replace("$ImageCellTemplate", $"{config.ImageClass} {cssEntry.ImgName}{config.HighlightSuffix}"))
+                        .Replace("$ImageCellTemplate", $"{config.ImageClass} {imageName}{config.HighlightSuffix}"))
                     .Replace("$HintId", GenerateHintId())
-                    .Replace("$HintCellTemplate", GenerateHint(cssEntry, config, config.HighlightSuffix));
+                    .Replace("$HintCellTemplate", GenerateHint(imageName, config, config.HighlightSuffix));
             }
 
             //cell for disabled image styles
             if (config.GenerateDisabled)
             {
                 sb.Append(ImageCellTemplate
-                        .Replace("$ImageCellTemplate", $"{config.ImageClass} {cssEntry.ImgName}{config.DisabledSuffix}"))
-                        .Replace("$HintId", GenerateHintId())
-                        .Replace("$HintCellTemplate", GenerateHint(cssEntry, config, config.DisabledSuffix));
+                        .Replace("$ImageCellTemplate", $"{config.ImageClass} {imageName}{config.DisabledSuffix}"))
+                    .Replace("$HintId", GenerateHintId())
+                    .Replace("$HintCellTemplate", GenerateHint(imageName, config, config.DisabledSuffix));
             }
 
             return sb.ToString();
         }
 
-        private string GenerateHint(CssEntry cssEntry, Config config, string suffix)
+        private string GenerateHint(string imageName, Config config, string suffix)
         {
             var sb = new StringBuilder();
             sb.Append(string.IsNullOrWhiteSpace(suffix)
-                ? DivMarkupTemplate.Replace("$ClassContent", $"{config.ImageClass} {cssEntry.ImgName}")
-                : DivMarkupTemplate.Replace("$ClassContent", $"{config.ImageClass} {cssEntry.ImgName}{suffix}"));
+                ? DivMarkupTemplate.Replace("$ClassContent", $"{config.ImageClass} {imageName}")
+                : DivMarkupTemplate.Replace("$ClassContent", $"{config.ImageClass} {imageName}{suffix}"));
 
             return sb.ToString();
         }

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SpriteEzNs
+namespace SpriteEz
 {
     public class SpriteEzException : Exception
     {

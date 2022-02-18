@@ -1,95 +1,100 @@
-﻿// ReSharper disable once CheckNamespace
-
-using System.IO;
-
-namespace SpriteEzNs
-{ 
+﻿namespace SpriteEz
+{
     /// <summary>
-    /// Generation options
+    ///     Generation options
     /// </summary>
     public class Config
     {
-        /// <summary>
-        /// If true, generate a highlighted image for all icons.
-        /// </summary>
-        public bool GenerateHighlight;
+        public double AutoSizeLg;
+        public double AutoSizeMd;
+        public double AutoSizeSm;
+        public double AutoSizeXl;
+
+        public double AutoSizeXs;
+        public double AutoSizeXxl;
+
+        public bool Compress;
 
         /// <summary>
-        /// If true, generate a disabled image for all icons.
+        ///     Directory to copy the component and derived parts
         /// </summary>
-        public bool GenerateDisabled;
+        public string DerivedDirectory;
 
         /// <summary>
-        /// How much to auto brighten the image.
+        ///     Templates used for the CSS line. $$NAME$$ is replaced by the image name,
+        ///     $$CSS$$ is replaced by the CSS. Note this does not include {}
         /// </summary>
-        public double HighlightMultiplier;
+        public string DisabledCssTemplate;
 
         /// <summary>
-        /// How much to darken or brighten the grayed image
+        ///     Suffix used to determine if the image is a disabled version of the suffix-less
+        ///     image. For example, home.png and home_d.png would be considered related
+        /// </summary>
+        public string DisabledSuffix;
+
+        /// <summary>
+        ///     How much to darken or brighten the grayed image
         /// </summary>
         public double DisableMultiplier;
 
-        /// <summary>
-        /// Name of the sprite file to generate
-        /// </summary>
-        public string SpriteImgFile;
+        public bool Embedded;
 
         /// <summary>
-        /// Name of the css file to generate
+        ///     If true, generate a disabled image for all icons.
         /// </summary>
-        public string SpriteCssFile;
+        public bool GenerateDisabled;
+
+        public bool GenerateHelpFile;
 
         /// <summary>
-        /// Templates used for the CSS line. $$NAME$$ is replaced by the image name,
-        /// $$CSS$$ is replaced by the CSS. Note this does not include {}
+        ///     If true, generate a highlighted image for all icons.
         /// </summary>
-        public string NormalCssTemplate;
+        public bool GenerateHighlight;
+
+        public bool GenerateWithFilters;
+
+        public double GrayScalePixelThrehold;
+
+        public string HelpFile;
 
         /// <summary>
-        /// Templates used for the CSS line. $$NAME$$ is replaced by the image name,
-        /// $$CSS$$ is replaced by the CSS. Note this does not include {}
-        /// </summary>
-        public string DisabledCssTemplate;
-        
-        /// <summary>
-        /// Templates used for the CSS line. $$NAME$$ is replaced by the image name,
-        /// $$CSS$$ is replaced by the CSS. Note this does not include {}
+        ///     Templates used for the CSS line. $$NAME$$ is replaced by the image name,
+        ///     $$CSS$$ is replaced by the CSS. Note this does not include {}
         /// </summary>
         public string HighlightCssTemplate;
 
         /// <summary>
-        /// Directory to copy the component and derived parts
+        ///     How much to auto brighten the image.
         /// </summary>
-        public string DerivedDirectory;
-
-        public bool GenerateHelpFile;
-
-        public string HelpFile;
-
-        public double GrayScalePixelThrehold;
-
-        public bool GenerateWithFilters;
-        public string ImageClass;
-        public string ImageTemplate;
-        public string OutputDirectory;
-
-        public string NormalSuffix;
+        public double HighlightMultiplier;
 
 
         /// <summary>
-        /// Suffix used to determine if the image is a highlighted version of the suffix-less
-        /// image. For example, home.png and home_h.png would be considered related
+        ///     Suffix used to determine if the image is a highlighted version of the suffix-less
+        ///     image. For example, home.png and home_h.png would be considered related
         /// </summary>
         public string HighlightSuffix;
 
+        public string ImageClass;
+        public string ImageTemplate;
+
         /// <summary>
-        /// Suffix used to determine if the image is a disabled version of the suffix-less
-        /// image. For example, home.png and home_d.png would be considered related
+        ///     Templates used for the CSS line. $$NAME$$ is replaced by the image name,
+        ///     $$CSS$$ is replaced by the CSS. Note this does not include {}
         /// </summary>
-        public string DisabledSuffix;
+        public string NormalCssTemplate;
 
-        public bool Compress;
+        public string NormalSuffix;
+        public string OutputDirectory;
 
-        public bool Embedded;
+        /// <summary>
+        ///     Name of the css file to generate
+        /// </summary>
+        public string SpriteCssFile;
+
+        /// <summary>
+        ///     Name of the sprite file to generate
+        /// </summary>
+        public string SpriteImgFile;
     }
 }

@@ -2,14 +2,14 @@
 using System.Drawing;
 
 // ReSharper disable once CheckNamespace
-namespace SpriteEzNs
+namespace SpriteEz
 {
-    public class EmbeddedCssGenerator : ICssGenerator
+    public class EmbeddedCssGenerator : IEmbeddedCssGenerator
     {
         private const string EmbeddedCssTemplate =
             "background-image: url(data:image/png;charset=utf-8;base64,$$DATA$$); background-repeat: no-repeat; background-position: center; height: $$HEIGHT$$px; width: 100%;";
 
-        public List<string> Generate(List<CssEntry> cssEntries, Config config)
+        public List<string> Generate(List<CssEntry> cssEntries, Config config, string spriteFileName = null)
         {
             var results = new List<string>();
 

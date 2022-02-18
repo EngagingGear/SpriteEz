@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
+using SpriteEz.Utils;
 
-namespace SpriteEzNs
+namespace SpriteEz
 {
     public class ImageFileListGenerator
     {
         private readonly Logger _logger;
+
         public ImageFileListGenerator(Logger logger)
         {
             _logger = logger;
         }
+
         public List<ImgFile> GenerateImageFileNames(List<string> fileList, Config config)
         {
             _logger.Log($"Files to process: {string.Join(",", fileList)}");
@@ -30,10 +32,12 @@ namespace SpriteEzNs
                     {
                         throw new InvalidOperationException();
                     }
+
                     if (string.IsNullOrWhiteSpace(config.OutputDirectory))
                     {
                         config.OutputDirectory = directoryName;
                     }
+
                     var filesBySearchPattern = Directory.GetFiles(directoryName, wildcard);
                     files.AddRange(filesBySearchPattern);
                 }
@@ -56,9 +60,11 @@ namespace SpriteEzNs
 
                 if (!ImageUtils.IsSupportedImageExtension(file))
                 {
-                    _logger.Log($"The file extension {Path.GetExtension(file)} is not supported. File: {file} will be skipped");
+                    _logger.Log(
+                        $"The file extension {Path.GetExtension(file)} is not supported. File: {file} will be skipped");
                     continue;
                 }
+
                 if (ImageUtils.IsAnimatedImage(file))
                 {
                     _logger.Log($"File: {file} is animated and will be skipped");
@@ -67,11 +73,17 @@ namespace SpriteEzNs
 
 
                 if (baseName.ToLower().EndsWith(config.HighlightSuffix.ToLower()))
+                {
                     highlightFiles.Add(file);
+                }
                 else if (baseName.ToLower().EndsWith(config.DisabledSuffix.ToLower()))
+                {
                     disabledFiles.Add(file);
+                }
                 else
+                {
                     normalFiles.Add(file);
+                }
             }
 
             var imgFiles = new List<ImgFile>();
@@ -80,13 +92,22 @@ namespace SpriteEzNs
                 var bright = AddExtension(file, config.HighlightSuffix);
                 var gray = AddExtension(file, config.DisabledSuffix);
                 if (!highlightFiles.Contains(bright))
+                {
                     bright = null;
+                }
                 else
+                {
                     highlightFiles.Remove(bright);
+                }
+
                 if (!disabledFiles.Contains(gray))
+                {
                     gray = null;
+                }
                 else
+                {
                     disabledFiles.Remove(gray);
+                }
 
                 imgFiles.Add(new ImgFile
                 {
@@ -107,6 +128,7 @@ namespace SpriteEzNs
                     ImgName = Path.GetFileNameWithoutExtension(file)
                 });
             }
+
             foreach (var file in disabledFiles)
             {
                 imgFiles.Add(new ImgFile

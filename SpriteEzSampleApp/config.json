@@ -18,5 +18,8 @@
   "highlighted-suffix": "_h",
   "disabled-suffix": "_d",
   "compress": false,
-  "embedded": true
+  "embedded": false,
+  "auto-size-xs":  0.33, 
+  "auto-size-md":  0.5, 
+  "auto-size-lg":  1 
 }
